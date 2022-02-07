@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 
-
-export const TitlesListStyled = styled.ul`
+export const TitlesList = styled.ul`
   background: white;
   padding: 10px;
   margin: 0;

@@ -1,29 +1,27 @@
 import React from 'react';
 import {ArticleTitle} from "./articleTitle/ArticleTitle";
-import {useParams} from "react-router-dom";
 import {useFetch} from "../../../../hooks/useFetchData";
 import {Loader} from "../../../../components/UI/Loader/Loader";
-import { TitlesListStyled } from './TitlesListStyled';
+import * as P from './parts';
+import {URLType} from "../../../../utils/articleTitleConstants";
 
 
-const ArticleTitlesList: React.FC = () => {
+export const ArticleTitlesList: React.FC<{url: URLType}> = ({url}) => {
 
-    const params = useParams();
-    const {data, isLoading} = useFetch(params.url);
+    const {data, isLoading, error} = useFetch(url)
 
     return (
-        <TitlesListStyled>
+        <P.TitlesList>
             {
                 isLoading
-                ? <Loader/>
-                : data ? data.map((articlesTitle, index: number) => {
-                    return <ArticleTitle webTitle={articlesTitle.webTitle}
-                                         webUrl={articlesTitle.webUrl} index={index + 1} key={articlesTitle.id}/>
-                }) : null
+                    ? <Loader/>
+                    : data
+                        ? data.map((articlesTitle, index: number) => {
+                            return <ArticleTitle webTitle={articlesTitle.webTitle}
+                                                 webUrl={articlesTitle.webUrl} index={index + 1} key={articlesTitle.id}/>
+                        })
+                        : <h1>{!error}</h1>
             }
-
-        </TitlesListStyled>
+        </P.TitlesList>
     )
 }
-
-export default ArticleTitlesList

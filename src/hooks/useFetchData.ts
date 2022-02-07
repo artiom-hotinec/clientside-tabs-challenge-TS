@@ -1,6 +1,6 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
-import { URLType } from "../types/Url";
+import {URLType} from "../types/Url";
 import {FOOTBALL, TRAVEL} from "../utils/articleTitleConstants";
 
 export interface IData {
@@ -17,6 +17,7 @@ export interface IData {
     pillarName: string
 }
 
+
 export const useFetch = (parametersUrl: string | undefined) => {
 
     const [data, setData] = useState<IData[]>();
@@ -29,21 +30,18 @@ export const useFetch = (parametersUrl: string | undefined) => {
     }else if(parametersUrl === TRAVEL){
         url = URLType.travel
     }
-
     async function fetchNow() {
-
         setLoading(true)
         try {
-
             const response = await axios.get('https://content.guardianapis.com/search?' + url);
             setLoading(false);
             setData(response.data.response.results);
-
         } catch (error: string | unknown) {
             setLoading(false)
             setError(error)
         }
     }
+
 
     useEffect( () => {
         fetchNow()

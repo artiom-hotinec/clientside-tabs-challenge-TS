@@ -5,6 +5,9 @@ export const InnerLI = styled.div`
   flex-direction: row;
   line-height: 1.5;
   padding: 5px 0 15px;
+  @media (max-width: 576px) {
+    padding-bottom: 5px;
+  }
 `
 
 export const Index = styled.span`
@@ -13,6 +16,12 @@ export const Index = styled.span`
   width: 20px;
   box-sizing: border-box;
   flex-shrink: 0;
+  
+  @media (max-width: 576px) {
+    padding-right: 15px;
+    font-size: 12px;
+    line-height: 23px
+  }
 `
 
 export const LinkTitles = styled.a.attrs<{ href: string }>(({href}) => ({

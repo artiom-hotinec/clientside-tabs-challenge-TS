@@ -1,6 +1,5 @@
 import * as React from 'react';
-import {InnerLI, LinkTitles, Index, HR} from './ArticleTitleStyles';
-
+import * as P from './parts';
 
 type ArticleTitleProps = {
     webTitle: string
@@ -12,13 +11,13 @@ type ArticleTitleProps = {
 export const ArticleTitle: React.FC<ArticleTitleProps> = ({webTitle, webUrl, index}) => {
     return (
         <li>
-            <InnerLI>
-                <Index>
+            <P.InnerLI>
+                <P.Index>
                     {index}
-                </Index>
-                <LinkTitles href={webUrl}>{webTitle}</LinkTitles>
-            </InnerLI>
-            <HR />
+                </P.Index>
+                <P.LinkTitles href={webUrl}>{webTitle}</P.LinkTitles>
+            </P.InnerLI>
+            <P.HR />
         </li>
     )
 }
