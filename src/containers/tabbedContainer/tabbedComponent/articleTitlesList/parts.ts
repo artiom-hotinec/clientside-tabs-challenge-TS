@@ -5,6 +5,7 @@ export const TitlesList = styled.ul`
   padding: 10px;
   margin: 0;
   list-style: none;
+
   
   & li:last-child hr{
     display: none;

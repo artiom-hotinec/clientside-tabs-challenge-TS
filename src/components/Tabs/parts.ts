@@ -5,12 +5,17 @@ interface TabPaneProps {
     id: string
 }
 
-export const TabPane = styled.div.attrs<TabPaneProps>(() => ({
+// export const TabPane = styled.div.attrs<TabPaneProps>(() => ({
+//
+// }))<TabPaneProps>`
+//   display: ${({activeKey, id }) => activeKey === id ? "flex" : "none"};
+//   width: 100%;
+// `;
 
-}))<TabPaneProps>`
-  display: ${({activeKey, id }) => activeKey === id ? "flex" : "none"};
+export const TabPane = styled.div`
+  display: flex;
   width: 100%;
-`;
+`
 
 
 export const TabbedContainerStyled = styled.div`
@@ -19,6 +24,7 @@ export const TabbedContainerStyled = styled.div`
   padding: 10px 5px;
   font-size: 20px;
   max-width: 960px;
+
  
 
   @media (max-width: 576px) {

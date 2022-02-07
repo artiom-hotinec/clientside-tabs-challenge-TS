@@ -8,17 +8,20 @@ type TabsType = {
     options: {
         key: string
         title: string
-        Content: () => ReactElement
+
     }[]
+    Content: () => ReactElement
+    changeHandler: (e: HashChangeEvent) => any
 }
 
 
-export const Tabs: React.FC<TabsType> = ({activeKey, options}) => {
+export const Tabs: React.FC<TabsType> = ({activeKey, options, Content,changeHandler }) => {
 
     const [activeItem, setActiveItem] = useState(activeKey)
 
     const changeKeyHandler = (e: any) => {
         setActiveItem(e.target.title)
+        changeHandler(e.target.title)
     }
 
     return (
@@ -34,16 +37,22 @@ export const Tabs: React.FC<TabsType> = ({activeKey, options}) => {
                 )}
             </TabTitleWrapper>
 
-            {options.map(({key, Content}) => <P.TabPane
-                key={key+ "_"}
-                activeKey = {activeItem}
-             id={key}
-                >
+            {/*{options.map(({key}) => <P.TabPane*/}
+            {/*    key={key+ "_"}*/}
+            {/*    activeKey = {activeItem}*/}
+            {/* id={key}*/}
+            {/*    >*/}
+            {/*    <div style={{width: '100%'}}>*/}
+            {/*        {Content()}*/}
+            {/*    </div>*/}
+            {/*    </P.TabPane>*/}
+            {/*)}*/}
+
+            <P.TabPane>
                 <div style={{width: '100%'}}>
                     {Content()}
                 </div>
-                </P.TabPane>
-            )}
+            </P.TabPane>
         </P.TabbedContainerStyled>
     )
 }

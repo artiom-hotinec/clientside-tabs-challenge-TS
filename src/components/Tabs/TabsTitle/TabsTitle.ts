@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import styled from 'styled-components'
 
 export const TabTitleWrapper = styled.ul`
@@ -7,15 +7,17 @@ export const TabTitleWrapper = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
+
 `
-export const  TabTitle = styled.li`
-       color: black;
-       text-decoration: none;
-       flex-grow: 1;
-       text-align: center;
-       padding: 10px 0;
-  
-  &.Active{
-    background:white;
+export const TabTitle = styled.li`
+  color: black;
+  text-decoration: none;
+  flex-grow: 1;
+  text-align: center;
+  padding: 10px 0;
+  cursor: pointer;
+
+  &.Active {
+    background: white;
   }
 `
