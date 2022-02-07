@@ -1,4 +1,4 @@
-import React, {ReactElement, useState} from 'react';
+import React, {ReactElement, useCallback, useState} from 'react';
 import {TabTitle, TabTitleWrapper} from "./TabsTitle/TabsTitle";
 import * as P from './parts'
 
@@ -8,51 +8,49 @@ type TabsType = {
     options: {
         key: string
         title: string
-
+        content: () => ReactElement
     }[]
-    Content: () => ReactElement
-    changeHandler: (e: HashChangeEvent) => any
 }
 
-
-export const Tabs: React.FC<TabsType> = ({activeKey, options, Content,changeHandler }) => {
+export const Tabs: React.FC<TabsType> = ({activeKey, options}) => {
 
     const [activeItem, setActiveItem] = useState(activeKey)
 
-    const changeKeyHandler = (e: any) => {
-        setActiveItem(e.target.title)
-        changeHandler(e.target.title)
-    }
+
+    const changeKeyHandler = useCallback(
+        (e: React.MouseEvent) => {
+            const target = e.target as HTMLTextAreaElement
+            setActiveItem(target.title)
+        },
+        [activeItem]
+    );
 
     return (
         <P.TabbedContainerStyled>
             <TabTitleWrapper>
-                {options.map(({key, title}) => <TabTitle
+                {options.map(({key, title}) =>
+                    <TabTitle
                         key={key}
                         title={key}
                         onClick={changeKeyHandler}
-                        className={activeItem === key ? "Active" : ""}>
+                        className={activeItem === key ? "active" : ""}>
                         {title}
                     </TabTitle>
                 )}
             </TabTitleWrapper>
 
-            {/*{options.map(({key}) => <P.TabPane*/}
-            {/*    key={key+ "_"}*/}
-            {/*    activeKey = {activeItem}*/}
-            {/* id={key}*/}
-            {/*    >*/}
-            {/*    <div style={{width: '100%'}}>*/}
-            {/*        {Content()}*/}
-            {/*    </div>*/}
-            {/*    </P.TabPane>*/}
-            {/*)}*/}
+            {options.map(({key, content}) =>
+                <P.TabPane key={key + "_"}>
+                    {
+                        activeItem === key
+                            ? <div style={{width: '100%'}}>
+                                {content()}
+                            </div>
+                            : null
+                    }
 
-            <P.TabPane>
-                <div style={{width: '100%'}}>
-                    {Content()}
-                </div>
-            </P.TabPane>
+                </P.TabPane>
+            )}
         </P.TabbedContainerStyled>
     )
 }
